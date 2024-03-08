@@ -20,6 +20,10 @@ class Student:
         drop_course(course): Drops a course from the student's enrollment.
         submit_grade(course, assessment, grade): Submits a grade for a student in a course.
     """
+    name = ""
+    student_id = 0
+    enrolled_courses = []
+    grades = {}
 
     def __init__(self, name, student_id):
         """
@@ -29,6 +33,8 @@ class Student:
             name (str): The name of the student.
             student_id (int): The unique ID of the student.
         """
+        self.name = name
+        self.student_id = student_id
         pass
 
 
@@ -42,6 +48,20 @@ class Student:
         Returns:
             None
         """
+        invalid = 0
+        if course.prerequisites == None:
+            self.enrolled_courses.append(course)
+            pass
+        else:
+
+            for prereq in course.prerequisites:
+                if prereq in self.grades:
+                    pass
+                else:
+                    invalid = 1
+            if invalid == 0:
+                self.enrolled_courses.append(course)
+
         pass
 
     def drop_course(self, course):
@@ -54,6 +74,10 @@ class Student:
         Returns:
             None
         """
+        try:
+            self.enrolled_courses.remove(course)
+        except ValueError:
+            pass
         pass
 
 
@@ -69,4 +93,6 @@ class Student:
         Returns:
             None
         """
+        self.grades[course] = {assessment.assessment_type: grade}
+
         pass
