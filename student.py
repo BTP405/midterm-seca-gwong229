@@ -93,6 +93,6 @@ class Student:
         Returns:
             None
         """
-        self.grades[course] = {assessment.assessment_type: grade}
+        self.grades[course] = {assessment: grade}
 
         pass
