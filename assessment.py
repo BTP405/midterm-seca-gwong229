@@ -10,10 +10,11 @@ class Assessment:
 
     Attributes:
         assessment_type (str): The type of assessment.
-
+    
     Methods:
         None
     """
+    assessment_type = ""
 
     def __init__(self, assessment_type):
         """

@@ -12,6 +12,14 @@ class Course:
         waitlisted_students (list): List of students waitlisted for the course.
         assessments (list): List of assessments (e.g., exams, quizzes) for the course.
     """
+    course_name = ""
+    instructor = ""
+    sections = 1
+    prerequisites = None
+    enrolled_students = []
+    waitlisted_students = []
+    assessments = []
+
 
     def __init__(self, course_name, instructor, sections=1, prerequisites=None):
         """Initialize a Course object.
@@ -22,6 +30,10 @@ class Course:
             sections (int, optional): The number of sections available for the course (default is 1).
             prerequisites (list, optional): List of prerequisite courses for the course (default is None).
         """
+        self.course_name = course_name
+        self.instructor = instructor
+        self.sections = sections
+        self.prerequisites = prerequisites
         pass
 
 
@@ -31,6 +43,10 @@ class Course:
         Args:
             student (Student): The student object to be enrolled or added to the waitlist.
         """
+        if self.sections != len(self.enrolled_students):
+            self.enrolled_students.append(student)
+        else:
+            self.waitlisted_students.append(student)
         pass
 
 
@@ -40,6 +56,14 @@ class Course:
         Args:
             student (Student): The student object to be removed from the course or waitlist.
         """
+        try:
+            self.enrolled_students.remove(student)
+        except ValueError:
+            pass
+        try:
+            self.waitlisted_students.remove(student)
+        except ValueError:
+            pass
         pass
 
 
@@ -49,6 +73,7 @@ class Course:
         Args:
             instructor (str): The name of the instructor to be assigned to the course.
         """
+        self.instructor = instructor
         pass
 
     def add_assessment(self, assessment):
@@ -57,5 +82,6 @@ class Course:
         Args:
             assessment (str): The description of the assessment to be added.
         """
+        self.assessments.append(assessment)
         pass
 
